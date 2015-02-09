@@ -2,6 +2,17 @@
 // Generated on Fri Feb 06 2015 12:01:05 GMT-0600 (CST)
 
 module.exports = function(config) {
+  'use strict';
+
+  var sauceLaunchers = {
+    SL_IE10: {
+      base: 'SauceLabs',
+      platform: 'Windows 7',
+      browserName: 'internet explorer',
+      version: '10.0'
+    },
+  };
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -43,7 +54,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage', 'coveralls'],
+    reporters: ['progress', 'coverage', 'coveralls', 'saucelabs'],
 
 
     // web server port
@@ -62,14 +73,19 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
+    customLaunchers: sauceLaunchers,
+
+    sauceLabs: {
+      testName: 'Unit Tests'
+    },
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS', 'Firefox'],
+    browsers: ['PhantomJS', 'Firefox', 'SL_IE10'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   });
 };
